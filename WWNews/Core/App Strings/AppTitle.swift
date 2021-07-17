@@ -10,5 +10,5 @@ import Foundation
 
 enum AppTitle: String
 {
-    case app = "Football League"
+    case app = "News"
 }

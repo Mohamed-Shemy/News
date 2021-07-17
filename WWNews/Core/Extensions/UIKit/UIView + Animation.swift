@@ -12,21 +12,30 @@ extension UIView
 {
     enum AnimationType
     {
-        case spring(duration: TimeInterval = 1, delay: TimeInterval = 0, damping: CGFloat = 0.5, velocity : CGFloat = 5)
+        case none
+        case spring(damping: CGFloat = 0.5, velocity : CGFloat = 5)
+        case scale(_ base: CGSize = .zero, final: CGSize = CGSize(width: 1, height: 1))
     }
 }
 
 extension UIView
 {
-    func animate(_ type: AnimationType, options: UIView.AnimationOptions = [],
+    func animate(_ type: AnimationType, duration: TimeInterval = 1,
+                 delay: TimeInterval = 0, options: UIView.AnimationOptions = [],
                  animations: @escaping () -> Void = { }, completion: ((Bool) -> Void)? = nil)
     {
         switch type
         {
-            case let .spring(duration, delay, damping, velocity):
+            case let .spring(damping, velocity):
                 springAnimation(duration: duration, delay: delay,
                                 damping: damping, velocity: velocity, options: options,
                                 animations: animations, completion: completion)
+                
+            case let .scale(base, final):
+                scale(base, final: final, duration: duration, delay: delay,
+                      options: options, animations: animations, completion: completion)
+                
+            case .none: return
         }
     }
     
@@ -44,6 +53,21 @@ extension UIView
                        initialSpringVelocity: velocity, options: .curveEaseInOut, animations:
                         {
                             self.transform = CGAffineTransform.identity
+                            animations()
+                        },
+                       completion: completion)
+    }
+    
+    private func scale(_ base: CGSize, final: CGSize, duration: TimeInterval,
+                       delay: TimeInterval, options: UIView.AnimationOptions = [],
+                       animations: @escaping () -> Void, completion: ((Bool) -> Void)? = nil)
+    {
+        transform = CGAffineTransform(scaleX: 0, y: 0)
+        
+        UIView.animate(withDuration: duration, delay: delay,
+                       options: options, animations:
+                        {
+                            self.transform = .identity
                             animations()
                         },
                        completion: completion)

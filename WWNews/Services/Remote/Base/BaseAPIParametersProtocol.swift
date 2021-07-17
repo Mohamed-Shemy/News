@@ -34,11 +34,6 @@ extension BaseAPIParametersProtocol
         ]
     }
     
-    var authorizationType: AuthorizationType?
-    {
-        .custom("API Key")
-    }
-    
     private func getValue<Value>(for key: InfoKey) -> Value?
     {
         Bundle.main.infoDictionary?[key.rawValue] as? Value

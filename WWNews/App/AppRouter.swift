@@ -8,11 +8,14 @@
 
 import UIKit
 
+typealias NewsNavigationRouter = Router<NewsNavigatable, UINavigationController>
+
 class AppRouter
 {
     // MARK:- Properties
     
     private var window: UIWindow
+    private var router: NewsNavigationRouter
     private var navigationController: UINavigationController
     
     // MARK:- init
@@ -22,6 +25,7 @@ class AppRouter
         self.window = window ?? UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
         self.navigationController = navigationController
+        router = .init(navigationController)
         setNavigationControllerStyle()
         setRoot(navigationController)
     }
@@ -35,7 +39,8 @@ class AppRouter
     
     func launchFirstScreen()
     {
-        // 
+        let country = Locale.current.regionCode ?? "us"
+        router.navigate(to: .news(country))
     }
     
     // MARK:- Helpers

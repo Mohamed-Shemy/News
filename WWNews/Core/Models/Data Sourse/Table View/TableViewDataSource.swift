@@ -10,6 +10,8 @@ import UIKit
 
 typealias ConfigurableTableViewCell = UITableViewCell & Configurable
 
+typealias ArticleDataSource = TableViewDataSource<ArticleViewModel, ArticleTableViewCell>
+
 class TableViewDataSource<Model, Cell: ConfigurableTableViewCell>: NSObject, UITableViewDataSource, UITableViewDelegate
 where Cell.Model == Model
 {
@@ -17,6 +19,8 @@ where Cell.Model == Model
     
     private(set) var items: [Model]
     weak var delegate: DataSourceDelegate?
+    
+    var animationType: UIView.AnimationType = .none
     var cellHeight: CGFloat = 48
     var isEmpty: Bool { items.isEmpty }
     
@@ -67,7 +71,7 @@ where Cell.Model == Model
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        cell.contentView.animate(.spring())
+        cell.animate(animationType)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

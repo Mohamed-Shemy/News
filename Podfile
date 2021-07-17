@@ -9,6 +9,7 @@ target 'WWNews' do
 
   pod 'Moya'
   pod 'Kingfisher'
+  pod 'KafkaRefresh'
   
   pod 'NVActivityIndicatorView', :git => 'https://github.com/ninjaprox/NVActivityIndicatorView.git', :tag => '4.8.0'
 
