@@ -24,6 +24,11 @@ struct Article: Codable
             let source = source?.viewModel
         else { return nil }
         
+        let publishedAt = publishedAt?
+            .replacingOccurrences(of: "T", with: " ")
+            .replacingOccurrences(of: "Z", with: "")
+            .replace(formate: "yyyy-MM-dd HH:mm:ss", with: "d MMM yyyy, HH:mm")
+        
         return .init(author: auther, title: title,
                      description: description, url: url ?? "",
                      urlToImage: urlToImage ?? "", publishedAt: publishedAt ?? "",

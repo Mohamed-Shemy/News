@@ -14,6 +14,8 @@ enum Alert
     
     case unkown(String)
     
+    case unableToLoadArticles
+    
     // MARK:- Values
     
     var value: String
@@ -21,6 +23,7 @@ enum Alert
         switch self
         {
             case let .unkown(message): return message
+            case .unableToLoadArticles: return "Unable to load articles!"
         }
     }
 }

@@ -11,12 +11,14 @@ import UIKit
 class ArticleTableViewCell: ConfigurableTableViewCell
 {
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var sourceNameLabel: UILabel!
     
     func configure(_ article: ArticleViewModel, at indexPath: IndexPath)
     {
         thumbnailImageView.setImage(from: article.urlToImage, placeholder: #imageLiteral(resourceName: "news.default"))
+        titleLabel.text = article.title
         descriptionLabel.text = article.description
         sourceNameLabel.text = article.source.name
     }

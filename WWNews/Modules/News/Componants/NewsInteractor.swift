@@ -93,7 +93,7 @@ class NewsInteractor: NewsInteractorDelegate
         switch result
         {
             case let .success(response): presentArticlesResponse(response)
-            case .failure: presenter?.didRecive(error: .unkown(""))
+            case .failure: presenter?.didRecive(error: .unableToLoadArticles)
         }
     }
     

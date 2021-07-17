@@ -101,6 +101,7 @@ class NewsViewController: UIViewController
     private func stopFooterRefreshing()
     {
         articlesTableView.footRefreshControl.endRefreshing()
+        articlesTableView.rowHeight = UITableView.automaticDimension
     }
     
     @objc func search(_ searchBar: UISearchBar)

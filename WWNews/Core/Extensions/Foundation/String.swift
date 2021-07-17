@@ -29,4 +29,14 @@ extension String
     {
         return isEmpty || trimmed.isEmpty
     }
+    
+    func replace(formate: String, with newFormate: String) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formate
+        guard let date = dateFormatter.date(from: self) else { return self }
+        
+        dateFormatter.dateFormat = newFormate
+        return dateFormatter.string(from: date)
+    }
 }
